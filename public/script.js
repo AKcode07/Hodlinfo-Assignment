@@ -1,33 +1,28 @@
-async function fetchTickers() {
-  try {
-    const response = await fetch("/api/tickers");
-    const tickers = await response.json();
-    displayTickers(tickers);
-  } catch (error) {
-    console.error("Error fetching tickers:", error);
-  }
-}
-
-function displayTickers(tickers) {
-  const container = document.getElementById("ticker-container");
-  container.innerHTML = ""; // Clear any previous content
-
-  tickers.forEach((ticker) => {
-    const tickerElement = document.createElement("div");
-    tickerElement.className = "ticker";
-
-    tickerElement.innerHTML = `
-            <h2>${ticker.name}</h2>
-            <p>Last: ₹${ticker.last}</p>
-            <p>Buy: ₹${ticker.buy}</p>
-            <p>Sell: ₹${ticker.sell}</p>
-            <p>Volume: ${ticker.volume}</p>
-            <p>Base Unit: ${ticker.base_unit}</p>
+document.addEventListener("DOMContentLoaded", () => {
+  fetch("/api/tickers")
+    .then((response) => {
+      if (!response.ok) {
+        throw new Error("Network response was not ok " + response.statusText);
+      }
+      return response.json();
+    })
+    .then((data) => {
+      const tbody = document.querySelector("tbody");
+      tbody.innerHTML = ""; // Clear existing table rows if any
+      data.forEach((ticker, index) => {
+        const row = document.createElement("tr");
+        row.innerHTML = `
+          <td>${index + 1}</td>
+          <td>${ticker.name}</td>
+          <td>₹ ${Number(ticker.last).toLocaleString()}</td>
+          <td>₹ ${Number(ticker.buy).toLocaleString()} / ₹ ${Number(
+          ticker.sell
+        ).toLocaleString()}</td>
+          <td>${ticker.volume}</td>
+          <td>${ticker.base_unit}</td>
         `;
-
-    container.appendChild(tickerElement);
-  });
-}
-
-// Fetch and display tickers when the page loads
-window.onload = fetchTickers;
+        tbody.appendChild(row);
+      });
+    })
+    .catch((error) => console.error("Error fetching data:", error));
+});
