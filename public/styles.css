@@ -5,83 +5,125 @@
     box-sizing: border-box;
 }
 
-/* General Styles */
+/* Light Theme (default) */
 body {
-    font-family: Arial, sans-serif;
-    background-color: #1f1f1f;
+    background-color: #ffffff;
+    color: #000000;
+}
+
+/* Dark Theme */
+body.dark-theme {
+    background-color: #1e1e1e;
     color: #ffffff;
 }
 
-.container {
-    width: 80%;
-    margin: 0 auto;
-    text-align: center;
+/* Smooth transition for theme change */
+body {
+    transition: background-color 0.3s ease, color 0.3s ease;
 }
 
-header {
-    display: flex;
-    justify-content: space-between;
-    align-items: center;
+/* Container and Layout */
+.container {
+    width: 100%;
+    margin: 0 auto;
+    text-align: center;
     padding: 20px;
 }
 
-header .logo {
+.header-container {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 7px;
+}
+
+#header-logo {
+    font-size: 2rem;
+    color: #3dc6c1; 
+    width: 280px;
+    margin-left: 10px;
+}
+
+.controls {
+    display: flex;
+    gap: 20px;
+}
+
+/* Theme Toggle */
+.theme-toggle-div {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 20px;
+}
+
+.toggle-container {
+    position: relative;
+}
+
+#theme-toggle {
+    border: none; /* Remove border */
+    padding: 7px 15px; /* Adjust padding */
+    cursor: pointer; /* Pointer cursor on hover */
+    border-radius: 10px; /* Rounded corners */
+    font-family: 'Oswald', sans-serif; /* Font family */
+    font-size: 15px; /* Slightly smaller font size */
+    box-shadow: 0px 4px 6px rgba(0, 0, 0, 0.1); /* Subtle shadow for depth */
+    display: none;
+}
+
+.toggle-label {
+    display: inline-block;
+    width: 60px;
+    height: 36px;
+    background-color: #e0e0e0; /* Light theme background */
+    border-radius: 25px;
+    position: relative;
+    cursor: pointer;
+    transition: background-color 0.3s ease;
+}
+
+body.dark-theme .toggle-label {
+    background-color: #2d3340; /* Dark theme background */
+}
+
+.toggle-ball {
+    position: absolute;
+    width: 30px;
+    height: 30px;
+    background-color: #ffffff; /* Light theme ball */
+    border-radius: 50%;
+    top: 3px;
+    left: 3px;
+    transition: 0.3s;
+}
+
+body.dark-theme .toggle-ball {
+    background-color: #47cacc; /* Dark theme ball */
+}
+
+#theme-toggle:checked + .toggle-label .toggle-ball {
+    transform: translateX(22px);
+}
+
+/* Best Price */
+.best-price {
+    margin: 20px 0;
     font-size: 2rem;
     color: #3dc6c1;
 }
 
-header .controls {
-    display: flex;
-    gap: 10px;
+.best-price h1 {
+    font-size: 3rem;
+    margin: 10px 0;
 }
 
-header .connect {
-    background-color: #3dc6c1;
-    border: none;
-    color: #ffffff;
-    padding: 10px 20px;
-    cursor: pointer;
-}
-
-.theme-toggle {
-    display: flex;
-    align-items: center;
-}
-
-.theme-toggle input {
-    display: none;
-}
-
-.theme-toggle label {
-    width: 40px;
-    height: 20px;
-    background-color: #555;
-    display: block;
-    border-radius: 10px;
-    position: relative;
-    cursor: pointer;
-}
-
-.theme-toggle label::after {
-    content: '';
-    width: 18px;
-    height: 18px;
-    background-color: #fff;
-    border-radius: 50%;
-    position: absolute;
-    top: 1px;
-    left: 1px;
-    transition: 0.3s;
-}
-
-.theme-toggle input:checked + label::after {
-    left: 21px;
-}
-
+/* Price Info */
 .price-info {
     display: flex;
     justify-content: space-around;
     margin: 20px 0;
+    color: #3dc6c1;
 }
 
 .price-info span {
@@ -90,45 +132,257 @@ header .connect {
     margin-top: 10px;
 }
 
-.best-price h1 {
-    font-size: 3rem;
-    margin: 10px 0;
-}
-
+/* Table Styling */
 table {
-    width: 100%;
-    margin: 20px 0;
-    border-collapse: collapse;
+    width: 95%;
+    border-collapse: separate; /* Change from collapse to separate for spacing */
+    border-spacing: 0 10px; /* Adds space between rows */
+    margin: 50px auto;
+    border-radius: 8px;
+    overflow: hidden;
+    transition: background-color 0.3s ease, color 0.3s ease;
 }
 
+/* Light Theme Table */
 thead {
-    background-color: #444;
+    transition: background-color 0.3s ease;
 }
 
-thead th {
-    padding: 10px;
+td, th {
+    padding: 20px; /* Increase padding to create a larger gap between points */
+    text-align: center; /* Center-align all text */
+    font-family: 'Oswald', sans-serif; /* Font family */   
 }
 
+th {
+    font-size: 25px; /* Increase header font size */
+    font-weight: bold;
+    font-family: 'Oswald', sans-serif; /* Font family */
+    color: #888;
+}
+
+td {
+    font-size: larger;
+}
+
+/* Light Theme Text Colors */
+td:nth-child(5) {
+    text-align: center;
+    color: #00ff00; /* Positive values in light theme */
+}
+
+td:nth-child(6) {
+    text-align: center;
+    color: #ff9933; /* Base unit color in light theme */
+}
+
+/* Dark Theme Text Colors */
+body.dark-theme td:nth-child(5) {
+    color: #47cacc; /* Positive values in dark theme */
+}
+
+body.dark-theme td:nth-child(6) {
+    color: #ffa500; /* Base unit color in dark theme */
+}
+
+/* Negative numbers remain red in both themes */
+td:nth-child(5).negative {
+    color: red;
+}
+
+td:nth-child(6).negative {
+    color: red;
+}
+tbody tr td:first-child {
+    border-top-left-radius: 15px; /* Rounded corner for top-left */
+    border-bottom-left-radius: 15px;
+}
+
+tbody tr td:last-child {
+    border-top-right-radius: 15px; /* Rounded corner for top-right */
+    border-bottom-right-radius: 15px;
+}
+
+body.dark-theme tbody tr td:first-child {
+    border-top-left-radius: 15px; /* Rounded corner for top-left */
+    border-bottom-left-radius: 15px;
+}
+
+body.dark-theme tbody tr td:last-child {
+    border-top-right-radius: 15px; /* Rounded corner for top-right */
+    border-bottom-right-radius: 15px;
+}
+
+/* Light Theme Row Styling */
 tbody tr {
-    background-color: #333;
+    background-color: #e0e0e0; /* Light theme background color */
+    border-radius: 15px; /* Optional: rounded corners for rows */
 }
 
-tbody td {
-    padding: 10px;
+/* Dark Theme Row Styling */
+body.dark-theme tbody tr {
+    background-color: #2E3241; /* Dark theme background color */
+    border-radius: 15px; /* Optional: rounded corners for rows */
 }
 
-tfoot {
-    margin: 20px 0;
-}
 
-button {
+/* Connect Telegram Button */
+.connect-tele {
+    display: flex;
+    align-items: center;
     background-color: #3dc6c1;
     color: #ffffff;
+    padding: 7px 15px;
+    gap: 5px;
     border: none;
-    padding: 10px 20px;
+    border-radius: 10px;
     cursor: pointer;
+    font-size: 18px;
+    font-weight: bold;
+    font-family: 'Oswald', sans-serif; /* Font family */
 }
 
-button:hover {
-    background-color: #3dc6c1;
+#tele-logo {
+    width: 19px;
+    height: 19px;
+}
+
+/* Buttons */
+#buttonn {
+    background-color: #e0e0e0; /* Light theme button background */
+    color: #000000; /* Light theme button text color */
+    border: none; /* Remove border */
+    padding: 7px 15px; /* Adjust padding */
+    cursor: pointer; /* Pointer cursor on hover */
+    border-radius: 10px; /* Rounded corners */
+    font-family: 'Oswald', sans-serif; /* Font family */
+    font-size: 15px; /* Slightly smaller font size */
+    box-shadow: 0px 4px 6px rgba(0, 0, 0, 0.1); /* Subtle shadow for depth */
+}
+
+body.dark-theme #buttonn {
+    background-color: #2b2f38; /* Dark theme button background */
+    color: #ffffff; /* Dark theme button text color */
+}
+
+/* Button Hover Effect */
+#buttonn:hover {
+    background-color: #d0d0d0; /* Light theme hover */
+    transition: background-color 0.3s ease; /* Smooth transition */
+}
+
+body.dark-theme #buttonn:hover {
+    background-color: #2e333d; /* Dark theme hover */
+}
+
+/* Spinner */
+.spinner-container {
+    position: relative;
+    width: 45px;
+    height: 45px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.circle {
+    position: relative;
+    width: 45px;
+    height: 45px;
+    background: conic-gradient(#00adb5 calc(var(--percentage) * 1%), #ddd 0);
+    border-radius: 100%;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+body.dark-theme .circle {
+    background: conic-gradient(#00adb5 calc(var(--percentage) * 1%), #444 0);
+}
+
+.circle .number {
+    position: absolute;
+    font-size: 20px;
+    text-align: center;
+    align-items: center;
+    justify-content: center;
+    display: flex;
+    border-radius: 100%;
+    height: 35px;
+    width: 35px;
+    color: #3dc6c1;
+    background-color: #ffffff; /* Light theme number background */
+}
+
+body.dark-theme .circle .number {
+    background-color: #1f1f1f; /* Dark theme number background */
+}
+
+.timer-label {
+    border-radius: 100%;
+    font-size: 18px;
+    font-weight: bold;
+}
+
+.price-info {
+    display: flex;
+    font-family: 'Oswald', sans-serif; /* Font family */
+    /* justify-content: space-around; */
+    align-items: center;
+    width: 100;
+    padding: 20px;
+    border-radius: 10px;
+    color: #000000;
+}
+
+
+/* Price Details and Change */
+.price-details, .price-change {
+    text-align: center;
+}
+
+.percentage {
+    font-size: 1.8rem !important; /* Force the size change */
+    color: #3dc6c1; /* Light blue color for percentages */
+}
+
+.label {
+    font-size: 0.9rem;
+    color: #7a8ca7; /* Light gray color for labels */
+}
+
+/* Best Price */
+.best-price {
+    text-align: center;
+}
+
+.best-price h1 {
+    font-size: 3.5rem; 
+}
+
+.best-price p {
+    font-size: 1rem;
+    color: #7a8ca7; /* Lighter gray for subtitle */
+}
+
+/* Button Styling */
+#footer-btn {
+    border: #3dc6c1 solid 1px; /* Border color */
+    color: #3dc6c1; /* Text color */
+    padding: 7px 15px; /* Adjust padding */
+    border-radius: 5px; /* Rounded corners */
+    font-family: 'Oswald', sans-serif; /* Font family */
+    font-size: 15px; /* Font size */
+    background-color: transparent; /* Transparent background to match screen */
+    cursor: pointer; /* Change cursor on hover */
+    transition: background-color 0.3s ease, color 0.3s ease; /* Smooth transition */
+}
+
+#footer-btn:hover {
+    background-color: #3dc6c1; /* Background color on hover */
+    color: white; /* Text color on hover */
+}
+
+#footer-btn:focus {
+    outline: none; /* Remove outline on focus */
 }

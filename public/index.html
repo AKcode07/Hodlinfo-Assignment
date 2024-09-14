@@ -6,46 +6,77 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>Hodlinfo</title>
   <link rel="stylesheet" href="styles.css">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Oswald:wght@200..700&display=swap" rel="stylesheet">
 </head>
 
 <body>
   <div class="container">
-    <header>
-      <div class="logo">HODLINFO</div>
+    <div class="header-container">
+      <div class="logo"><img src="./images/HODLINFO_white.8f78fc06.png" id="header-logo" alt=""></div>
       <div class="controls">
-        <select>
+        <select id="buttonn">
           <option value="INR">INR</option>
-          <option value="USD">USD</option>
         </select>
-        <select>
-          <option value="BTC">BTC</option>
-          <option value="ETH">ETH</option>
+        <select id="buttonn">
+          <option value="/BTC-INR">BTC</option>
+          <option value="/ETH-INR">ETH</option>
+          <option value="/USDT-INR">USDT</option>
+          <option value="/XRP-INR">XRP</option>
+          <option value="/TRX-INR">TRX</option>
+          <option value="/DASH-INR">DASH</option>
+          <option value="/ZEC-INR">ZEC</option>
+          <option value="/XEM-INR">XEM</option>
+          <option value="/IOST-INR">IOST</option>
+          <option value="/WIN-INR">WIN</option>
+          <option value="/BTT-INR">BTT</option>
+          <option value="/WRX-INR">WRX</option>
         </select>
-        <button>BUY BTC</button>
+        <button id="buttonn">BUY BTC</button>
       </div>
-      <button class="connect">Connect Telegram</button>
-      <div class="theme-toggle">
-        <input type="checkbox" id="theme-toggle">
-        <label for="theme-toggle"></label>
+
+      <div class="theme-toggle-div">
+        <div class="spinner-container">
+          <div class="circle" id="spinner">
+            <div class="number" id="timer-label">60</div>
+          </div>
+        </div>
+        <button class="connect-tele">
+          <img src="./images/telegram-icon-2048x1739-6c7sghxm.png" id="tele-logo" alt="">
+          Connect Telegram
+        </button>
+        <div class="toggle-container">
+          <input type="checkbox" id="theme-toggle">
+          <label for="theme-toggle" class="toggle-label">
+            <span class="toggle-ball"></span>
+          </label>
+        </div>
       </div>
-    </header>
+    </div>
+
     <main>
       <div class="price-info">
         <div class="price-details">
-          <span>0.1 %</span>
-          <span>5 Mins</span>
-          <span>0.96 %</span>
-          <span>1 Hour</span>
+          <span class="percentage">0.1 %</span>
+          <span class="label">5 Mins</span>
+        </div>
+        <div class="price-details">
+          <span class="percentage">0.96 %</span>
+          <span class="label">1 Hour</span>
         </div>
         <div class="best-price">
+          <p>Best Price to Trade</p>
           <h1>₹ 26,56,110</h1>
           <p>Average BTC/INR net price including commission</p>
         </div>
         <div class="price-change">
-          <span>2.73 %</span>
-          <span>1 Day</span>
-          <span>7.51 %</span>
-          <span>7 Days</span>
+          <span class="percentage">2.73 %</span>
+          <span class="label">1 Day</span>
+        </div>
+        <div class="price-change">
+          <span class="percentage">7.51 %</span>
+          <span class="label">7 Days</span>
         </div>
       </div>
       <table>
@@ -65,7 +96,7 @@
       </table>
     </main>
     <footer>
-      <button>Add hodlinfo to home screen</button>
+      <button id="footer-btn">Add hodlinfo to home screen</button>
     </footer>
   </div>
   <script src="script.js"></script>
